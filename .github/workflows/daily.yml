@@ -1,0 +1,17 @@
+name: Rayan Studio Daily Bot
+on:
+  schedule:
+    - cron: '30 12 * * *'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - run: pip install -r requirements.txt
+      - env:
+          BIDEO_PASSWORD: ${{ secrets.BIDEO_PASSWORD }}
+        run: python main.py
